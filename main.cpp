@@ -37,43 +37,52 @@ void mostrarCocineros(const Cocinero cocineros[], int cantidadCocineros) {
 }
 
 void mostrarCocineroMayorEdad(const Cocinero cocineros[], int cantidadCocineros) {
-	int indiceMayorEdad = -1;
-	int mayorEdad = INT_MIN;
+	int mayorEdad = 0;
+	int ubicacion = 0;
 
-	for (int i = 0; i < cantidadCocineros; ++i) {
+	if (cantidadCocineros == 0) {
+		std::cout << "No hay cocineros registrados.\n";
+		return;
+	}
+
+	mayorEdad = cocineros[0].edad;
+
+	for (int i = 0; i < cantidadCocineros; i++) {
+		std::cout << cocineros[i].edad;
 		if (cocineros[i].edad > mayorEdad) {
 			mayorEdad = cocineros[i].edad;
-			indiceMayorEdad = i;
+			ubicacion = i;
 		}
 	}
 
-	if (indiceMayorEdad != -1) {
-		std::cout << "Cocinero con mayor edad:\n";
-		std::cout << "Nombre: " << cocineros[indiceMayorEdad].nombre << " " << cocineros[indiceMayorEdad].apellido << ", Edad: " << cocineros[indiceMayorEdad].edad << "\n";
-	}
-	else {
-		std::cout << "No hay cocineros registrados.\n";
-	}
+	std::cout << "Cocinero con mayor edad:\n";
+	std::cout << "Nombre: " << cocineros[ubicacion].nombre << " " << cocineros[ubicacion].apellido << ", Edad: " << cocineros[ubicacion].edad << "\n";
+
+	return;
 }
 
 void mostrarCocineroMenorSalario(const Cocinero cocineros[], int cantidadCocineros) {
-	int indiceMenorSalario = -1;
-	int menorSalario = INT_MAX;
+	int menorSalario = 0;
+	int ubicacion = 0;
 
-	for (int i = 0; i < cantidadCocineros; ++i) {
+	if (cantidadCocineros == 0) {
+		std::cout << "No hay cocineros registrados.\n";
+		return;
+	}
+
+	menorSalario = cocineros[0].edad;
+
+	for (int i = 0; i < cantidadCocineros; i++) {
 		if (cocineros[i].salario < menorSalario) {
 			menorSalario = cocineros[i].salario;
-			indiceMenorSalario = i;
+			ubicacion = i;
 		}
 	}
 
-	if (indiceMenorSalario != -1) {
-		std::cout << "Cocinero con menor salario:\n";
-		std::cout << "Nombre: " << cocineros[indiceMenorSalario].nombre << " " << cocineros[indiceMenorSalario].apellido << ", Salario: " << cocineros[indiceMenorSalario].salario << "\n";
-	}
-	else {
-		std::cout << "No hay cocineros registrados.\n";
-	}
+	std::cout << "Cocinero con mayor edad:\n";
+	std::cout << "Nombre: " << cocineros[ubicacion].nombre << " " << cocineros[ubicacion].apellido << ", Edad: " << cocineros[ubicacion].edad << "\n";
+
+	return;
 }
 
 void mostrarCocinerosPorTipo(const Cocinero cocineros[], int cantidadCocineros) {
@@ -124,13 +133,12 @@ int main() {
 
 		std::cout << "Ingrese la identificacion: ";
 		std::cin >> id;
-
 		// Verificar si la identificación ya existe
 		bool existe = false;
+
 		for (int i = 0; i < cantidadCocineros; ++i) {
 			if (cocineros[i].identificacion == id) {
 				existe = true;
-				break;
 			}
 		}
 
@@ -158,6 +166,8 @@ int main() {
 		Cocinero nuevoCocinero(id, nom, ape, ed, sal, tipo);
 		cocineros[cantidadCocineros] = nuevoCocinero;
 		cantidadCocineros++;
+
+
 
 		std::cout << "Cocinero ingresado correctamente.\n";
 		goto retorno;
